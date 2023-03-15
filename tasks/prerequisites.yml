@@ -1,0 +1,13 @@
+---
+# task/prerequisites file for manage_pip_packages
+- name: "Install python3 and pip"
+  ansible.builtin.include_role:
+    name: ednxzu.manage_apt_packages
+  vars:
+    manage_apt_packages_list:
+      - name: "{{ manage_pip_packages_python3_package_name }}"
+        version: latest
+        state: present
+      - name: "{{ manage_pip_packages_pip3_package_name }}"
+        version: latest
+        state: present

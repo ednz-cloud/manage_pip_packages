@@ -1,4 +1,4 @@
 ---
-# requirements file for molecule
+# meta file for hashicorp_consul
 roles:
   - name: ednxzu.manage_apt_packages

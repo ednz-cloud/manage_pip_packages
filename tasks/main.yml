@@ -1,2 +1,13 @@
 ---
 # task/main file for manage_pip_packages
+- name: "Import prerequisites.yml"
+  ansible.builtin.include_tasks: prerequisites.yml
+  when: manage_pip_packages_install_python
+
+- name: "Install/remove required packages"
+  ansible.builtin.pip:
+    name: "{{ item.name }}{% if item.version_constraint not in [None, '', 'latest'] %}{{ item.version_constraint }}{% endif %}"
+    state: "{{ item.state }}"
+  loop: "{{ manage_pip_packages_list }}"
+  when: manage_pip_packages_list is defined
+    and manage_pip_packages_list not in [None, '']

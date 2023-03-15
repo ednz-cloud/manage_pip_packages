@@ -1,2 +1,4 @@
 ---
 # vars file for manage_pip_packages
+manage_pip_packages_python3_package_name: python3
+manage_pip_packages_pip3_package_name: python3-pip
