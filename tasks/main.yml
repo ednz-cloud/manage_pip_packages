@@ -2,7 +2,7 @@
 # task/main file for manage_pip_packages
 - name: "Import prerequisites.yml"
   ansible.builtin.include_tasks: prerequisites.yml
-  when: manage_pip_packages_install_python
+  when: manage_pip_packages_install_prereqs
 
 - name: "Install/remove required packages"
   ansible.builtin.pip:

@@ -11,17 +11,24 @@ None.
 
 Role Variables
 --------------
-Available variables are listed below, along with default values. A sample file for the default values is available in `default/hashicorp_consul.yml.sample` in case you need it for any `group_vars` or `host_vars` configuration.
+Available variables are listed below, along with default values. A sample file for the default values is available in `default/manage_pip_packages.yml.sample` in case you need it for any `group_vars` or `host_vars` configuration.
 
 ```yaml
-hashi_consul_install: true # by default, set to true
+manage_pip_packages_install_prereqs: true # by default, set to true
 ```
-This variable defines if the consul package is to be installed or not before configuring. If you install consul using another task, you can set this to `false`.
+```yaml
+manage_apt_packages_list: # by default, not defined
+  - name: nginx
+    version_constraint: latest # Leaving empty or setting '' will be considered as latest
+    state: absent
+  - name: ...
+```
+This variable is a list of packages, with their name, desired version and state. `version_constraint` can be multiple constraints,separatedby commas (example: `>1.10`, `>1.10,<1.15,!=1.12`,`==1.13`). 
 
 Dependencies
 ------------
 
-This role requires both `ednxzu.manage_repositories` and `ednxzu.manage_apt_packages` to install consul. If you already installed consul, you can set `hashi_consul_install` to `false`, and that'll remove the dependencies.
+This role requires `ednxzu.manage_apt_packages` to install python3 and pip. If you already installed python and pip, you can skip dependencies by setting `manage_pip_packages_install_prereqs` to `false`.
 
 Example Playbook
 ----------------
@@ -32,6 +39,21 @@ Including an example of how to use your role (for instance, with variables passe
 - hosts: servers
   roles:
     - ednxzu.manage_pip_packages
+```
+
+```yaml
+# calling the role inside a playbook and injecting variables (in another role for example)
+- hosts: servers
+  tasks:
+    - name: "Install ansible with pip"
+      ansible.builtin.include_role: 
+        name: ednxzu.manage_pip_packages
+      vars:
+        manage_pip_packages_install_prereqs: false
+        manage_pip_packages_list:
+          - name: ansible-core
+            version_constraint: latest
+            state: present
 ```
 
 License
