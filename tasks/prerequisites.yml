@@ -11,3 +11,8 @@
       - name: "{{ manage_pip_packages_pip3_package_name }}"
         version: latest
         state: present
+
+- name: "Update pip to latest"
+  ansible.builtin.pip:
+    name: pip
+    extra_args: --upgrade
