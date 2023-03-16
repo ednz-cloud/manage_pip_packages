@@ -1,5 +1,5 @@
 """Role testing files using testinfra."""
-
+import json
 
 def test_hosts_file(host):
     """Validate /etc/hosts file."""
@@ -18,5 +18,8 @@ def test_python_pip_packages_installed(host):
 def test_packages_not_installed(host):
     """Validate vim is installed"""
     pip_packages_list = host.pip_package.get_packages(pip_path='pip')
+    assert pip_packages_list['pip']
+    assert pip_packages_list['docker']
+    assert pip_packages_list['zeubi']
     print(pip_packages_list)
-    assert True == False
+
