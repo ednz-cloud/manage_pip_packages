@@ -4,7 +4,7 @@
   ansible.builtin.include_tasks: prerequisites.yml
   when: manage_pip_packages_install_prereqs
 
-- name: "Install/remove required packages"
+- name: "Install/remove required pip packages"
   ansible.builtin.pip:
     name: "{{ item.name }}{% if item.version_constraint not in [None, '', 'latest'] %}{{ item.version_constraint }}{% endif %}"
     state: "{{ item.state }}"
