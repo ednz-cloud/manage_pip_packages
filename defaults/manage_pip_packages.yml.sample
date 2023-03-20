@@ -1,5 +1,4 @@
 ---
-# defaults file for manage_pip_packages
 # manage_pip_packages_install_python: true
 # manage_pip_packages_install_pip: true
 # manage_pip_packages_list:
