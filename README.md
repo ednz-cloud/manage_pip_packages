@@ -2,7 +2,7 @@ Manage pip packages
 =========
 > This repository is only a mirror. Development and testing is done on a private gitlab server.
 
-This role enables you to manage python packages on debian-based distributions. It can be used on its own , or be called by other roles the install/remove packages on demand.
+This role enables you to manage python packages on **debian-based** distributions. It can be used on its own , or be called by other roles the install/remove packages on demand.
 
 Requirements
 ------------
@@ -23,7 +23,7 @@ manage_apt_packages_list: # by default, not defined
     state: absent
   - name: ...
 ```
-This variable is a list of packages, with their name, desired version and state. `version_constraint` can be multiple constraints,separatedby commas (example: `>1.10`, `>1.10,<1.15,!=1.12`,`==1.13`). 
+This variable is a list of packages, with their name, desired version and state. `version_constraint` can be multiple constraints,separatedby commas (example: `>1.10`, `>1.10,<1.15,!=1.12`,`==1.13`).
 
 Dependencies
 ------------
@@ -33,7 +33,6 @@ This role requires `ednxzu.manage_apt_packages` to install python3 and pip. If y
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 ```yaml
 # calling the role inside a playbook with either the default or group_vars/host_vars
 - hosts: servers
@@ -46,7 +45,7 @@ Including an example of how to use your role (for instance, with variables passe
 - hosts: servers
   tasks:
     - name: "Install ansible with pip"
-      ansible.builtin.include_role: 
+      ansible.builtin.include_role:
         name: ednxzu.manage_pip_packages
       vars:
         manage_pip_packages_install_prereqs: false
