@@ -17,7 +17,7 @@ Available variables are listed below, along with default values. A sample file f
 manage_pip_packages_install_prereqs: true # by default, set to true
 ```
 ```yaml
-manage_apt_packages_list: # by default, not defined
+manage_pip_packages_list: # by default, not defined
   - name: nginx
     version_constraint: latest # Leaving empty or setting '' will be considered as latest
     state: absent
