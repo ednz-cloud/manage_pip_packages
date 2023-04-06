@@ -4,13 +4,7 @@
   ansible.builtin.include_role:
     name: ednxzu.manage_apt_packages
   vars:
-    manage_apt_packages_list:
-      - name: "{{ manage_pip_packages_python3_package_name }}"
-        version: latest
-        state: present
-      - name: "{{ manage_pip_packages_pip3_package_name }}"
-        version: latest
-        state: present
+    manage_apt_packages_list: "{{ manage_pip_packages_required_packages }}"
 
 - name: "Update pip to latest"
   ansible.builtin.pip:

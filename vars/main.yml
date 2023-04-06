@@ -1,4 +1,9 @@
 ---
 # vars file for manage_pip_packages
-manage_pip_packages_python3_package_name: python3
-manage_pip_packages_pip3_package_name: python3-pip
+manage_pip_packages_required_packages:
+  - name: python3
+    version: latest
+    state: present
+  - name: python3-pip
+    version: latest
+    state: present
