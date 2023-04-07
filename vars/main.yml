@@ -1,5 +1,7 @@
 ---
 # vars file for manage_pip_packages
+manage_pip_packages_prerequisites_roles:
+  - ednxzu.manage_apt_packages
 manage_pip_packages_required_packages:
   - name: python3
     version: latest

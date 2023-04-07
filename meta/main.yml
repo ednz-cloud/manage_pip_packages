@@ -22,5 +22,4 @@ galaxy_info:
     - 'pip'
     - 'packages'
 
-dependencies:
-  - name: ednxzu.manage_apt_packages
+dependencies: []

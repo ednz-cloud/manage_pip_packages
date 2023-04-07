@@ -1,5 +1,13 @@
 ---
 # task/prerequisites file for manage_pip_packages
+- name: "Install required roles"
+  ansible.builtin.command:
+    cmd: "ansible-galaxy install {{ item }}"
+  loop: "{{ manage_pip_packages_prerequisites_roles }}"
+  changed_when: false
+  delegate_to: localhost
+  run_once: true
+
 - name: "Install python3 and pip"
   ansible.builtin.include_role:
     name: ednxzu.manage_apt_packages
