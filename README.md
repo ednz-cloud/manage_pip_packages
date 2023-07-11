@@ -1,4 +1,4 @@
-Manage pip packages
+manage_pip_packages
 =========
 > This repository is only a mirror. Development and testing is done on a private gitlab server.
 
