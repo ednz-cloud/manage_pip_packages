@@ -28,7 +28,7 @@ This variable is a list of packages, with their name, desired version and state.
 Dependencies
 ------------
 
-This role has a task that installs its own dependencies located in `task/prerequisites.yml`, so that you don't need to manage them. This role requires `ednxzu.manage_apt_packages` to install python3 and pip. If you already installed python and pip, you can skip dependencies by setting `manage_pip_packages_install_prereqs` to `false`.
+`ednxzu.manage_apt_packages` to install python3 and pip (if selected).
 
 Example Playbook
 ----------------
