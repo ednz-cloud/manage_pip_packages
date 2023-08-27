@@ -8,6 +8,7 @@
   ansible.builtin.pip:
     name: "{{ item.name }}{% if item.version_constraint not in [None, '', 'latest'] %}{{ item.version_constraint }}{% endif %}"
     state: "{{ item.state }}"
+    extra_args: "{% if manage_pip_packages_allow_break_system_packages %}--break-system-packages{% endif %}"
   loop: "{{ manage_pip_packages_list }}"
   when: manage_pip_packages_list is defined
     and manage_pip_packages_list not in [None, '']

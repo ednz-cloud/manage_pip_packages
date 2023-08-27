@@ -25,6 +25,14 @@ manage_pip_packages_list: # by default, not defined
 ```
 This variable is a list of packages, with their name, desired version and state. `version_constraint` can be multiple constraints,separated by commas (example: `>1.10`, `>1.10,<1.15,!=1.12`,`==1.13`).
 
+```yaml
+manage_pip_packages_allow_break_system_packages: false # by default, set to false
+```
+This variable allow you to pass the `--break_system_packages` to pip.
+
+> **Warning**
+> This is not recommended, and is only here if you have no other choice to install packages that aren't supported by the package manager, on distros that enforce the [PEP668](https://peps.python.org/pep-0668/). Chances are you can probably use [manage_pipx_packages](https://github.com/ednxzu/manage_pipx_packages) to install packages using pipx, avoiding the potential damages to your system.
+
 Dependencies
 ------------
 

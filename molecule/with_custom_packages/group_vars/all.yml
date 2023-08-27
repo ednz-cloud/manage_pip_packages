@@ -10,3 +10,4 @@ manage_pip_packages_list:
   - name: vault-cli
     version_constraint: '<3.1.0'
     state: present
+manage_pip_packages_allow_break_system_packages: false
