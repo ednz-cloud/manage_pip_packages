@@ -47,8 +47,18 @@
           ansible.builtin.assert:
             that:
               - "'pip' in pip3_updated_list"
-              - "not pip3_outdated_list"
+              - "'pip' not in pip3_outdated_list"
+              - "'vault-cli' not in pip3_updated_list"
+              - "'vault-cli' in pip3_outdated_list"
+              - "'yamllint' not in pip3_updated_list"
+              - "'yamllint' in pip3_outdated_list"
+              - "'docker' in pip3_updated_list"
+              - "'docker' not in pip3_outdated_list"
 
         - name: "Print up-to-date packages"
           ansible.builtin.debug:
             msg: "{{ pip3_updated_list }}"
+
+        - name: "Print out-of-date packages"
+          ansible.builtin.debug:
+            msg: "{{ pip3_outdated_list }}"
