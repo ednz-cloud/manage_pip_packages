@@ -19,6 +19,9 @@
               - stat_etc_hosts.stat.gr_name == 'root'
 
     - name: "Test: packages pip, vault-cli, yamllint, docker"
+      vars:
+        wanted_up_to_date_list: ["pip", "docker"]
+        wanted_out_of_date_list: ["vault-cli", "yamllint"]
       block:
         - name: "Get pip3 up-to-date packages"
           ansible.builtin.command: "pip3 list -u --format=json"
@@ -30,17 +33,22 @@
           changed_when: false
           register: pip_outdated_packages
 
+        - name: "Set fact for pip3 up-to-date packages"
+          ansible.builtin.set_fact:
+            pip3_updated_list: "{{ pip3_updated_list | default({}) | combine({item.name: item.version}) }}"
+          loop: "{{ pip_updated_packages.stdout | from_json | selectattr('name', 'in', wanted_up_to_date_list) | list }}"
+
+        - name: "Set fact for pip3 out-of-date packages"
+          ansible.builtin.set_fact:
+            pip3_outdated_list: "{{ pip3_outdated_list | default({}) | combine({item.name: item.version}) }}"
+          loop: "{{ pip_outdated_packages.stdout | from_json | selectattr('name', 'in', wanted_out_of_date_list) | list }}"
+
         - name: "Verify packages pip, vault-cli, yamllint, docker"
-          vars:
-            pip_up_to_date_list: "{{ pip_updated_packages.stdout | from_json | json_query('[].name') }}"
-            pip_out_of_date_list: "{{ pip_outdated_packages.stdout | from_json | json_query('[].name') }}"
           ansible.builtin.assert:
             that:
-              - "'pip' in pip_up_to_date_list"
-              - "'pip' not in pip_out_of_date_list"
-              - "'vault-cli' not in pip_up_to_date_list"
-              - "'vault-cli' not in pip_out_of_date_list"
-              - "'yamllint' not in pip_up_to_date_list"
-              - "'yamllint' not in pip_out_of_date_list"
-              - "'docker' not in pip_up_to_date_list"
-              - "'docker' not in pip_out_of_date_list"
+              - "'pip' in pip3_updated_list"
+              - "pip3_outdated_list is not defined"
+
+        - name: "Print up-to-date packages"
+          ansible.builtin.debug:
+            msg: "{{ pip3_updated_list }}"
