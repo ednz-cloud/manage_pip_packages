@@ -31,12 +31,12 @@ manage_pip_packages_allow_break_system_packages: false # by default, set to fals
 This variable allow you to pass the `--break_system_packages` to pip.
 
 > **Warning**
-> This is not recommended, and is only here if you have no other choice to install packages that aren't supported by the package manager, on distros that enforce the [PEP668](https://peps.python.org/pep-0668/). Chances are you can probably use [manage_pipx_packages](https://github.com/ednxzu/manage_pipx_packages) to install packages using pipx, avoiding the potential damages to your system.
+> This is not recommended, and is only here if you have no other choice to install packages that aren't supported by the package manager, on distros that enforce the [PEP668](https://peps.python.org/pep-0668/). Chances are you can probably use [manage_pipx_packages](https://github.com/ednz_cloud/manage_pipx_packages) to install packages using pipx, avoiding the potential damages to your system.
 
 Dependencies
 ------------
 
-`ednxzu.manage_apt_packages` to install python3 and pip (if selected).
+`ednz_cloud.manage_apt_packages` to install python3 and pip (if selected).
 
 Example Playbook
 ----------------
@@ -45,7 +45,7 @@ Example Playbook
 # calling the role inside a playbook with either the default or group_vars/host_vars
 - hosts: servers
   roles:
-    - ednxzu.manage_pip_packages
+    - ednz_cloud.manage_pip_packages
 ```
 
 ```yaml
@@ -54,7 +54,7 @@ Example Playbook
   tasks:
     - name: "Install ansible with pip"
       ansible.builtin.include_role:
-        name: ednxzu.manage_pip_packages
+        name: ednz_cloud.manage_pip_packages
       vars:
         manage_pip_packages_install_prereqs: false
         manage_pip_packages_list:

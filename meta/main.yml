@@ -1,12 +1,12 @@
 ---
 # meta file for manage_pip_packages
 galaxy_info:
-  namespace: 'ednxzu'
-  role_name: 'manage_pip_packages'
-  author: 'Bertrand Lanson'
-  description: 'Package management for python on debian-based distros.'
-  license: 'license (BSD, MIT)'
-  min_ansible_version: '2.10'
+  namespace: "ednz_cloud"
+  role_name: "manage_pip_packages"
+  author: "Bertrand Lanson"
+  description: "Package management for python on debian-based distros."
+  license: "license (BSD, MIT)"
+  min_ansible_version: "2.10"
   platforms:
     - name: Ubuntu
       versions:
@@ -17,10 +17,10 @@ galaxy_info:
         - bullseye
         - bookworm
   galaxy_tags:
-    - 'ubuntu'
-    - 'debian'
-    - 'python3'
-    - 'pip'
-    - 'packages'
+    - "ubuntu"
+    - "debian"
+    - "python3"
+    - "pip"
+    - "packages"
 
 dependencies: []
