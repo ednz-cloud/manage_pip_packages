@@ -9,4 +9,6 @@
 - name: "Update pip to latest"
   ansible.builtin.pip:
     name: pip
-    extra_args: "--upgrade{% if manage_pip_packages_allow_break_system_packages %} --break-system-packages{% endif %}"
+    extra_args: "--upgrade"
+  when:
+    - not manage_pip_packages_allow_break_system_packages
