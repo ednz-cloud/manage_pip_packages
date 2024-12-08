@@ -6,17 +6,23 @@
   tasks:
     - name: "Test: packages pip, vault-cli, yamllint, docker"
       vars:
-        wanted_up_to_date_list: ["pip", "docker"]
+        wanted_up_to_date_list: ["docker"]
         wanted_out_of_date_list: ["vault-cli", "yamllint"]
       block:
         - name: "Get pip3 up-to-date packages"
           ansible.builtin.command: "pip3 list -u --format=json"
           changed_when: false
+          environment:
+            VIRTUAL_ENV: /tmp/venv
+            PATH: "/tmp/venv/bin:$PATH"
           register: pip_updated_packages
 
         - name: "Get pip3 out-of-date packages"
           ansible.builtin.command: "pip3 list -o --format=json"
           changed_when: false
+          environment:
+            VIRTUAL_ENV: /tmp/venv
+            PATH: "/tmp/venv/bin:$PATH"
           register: pip_outdated_packages
 
         - name: "Set fact for pip3 up-to-date packages"
@@ -29,17 +35,19 @@
             pip3_outdated_list: "{{ pip3_outdated_list | default({}) | combine({item.name: item.version}) }}"
           loop: "{{ pip_outdated_packages.stdout | from_json | selectattr('name', 'in', wanted_out_of_date_list) | list }}"
 
-        - name: "Verify packages pip, vault-cli, yamllint, docker"
+        - name: "Verify up-to-date packages"
           ansible.builtin.assert:
             that:
-              - "'pip' in pip3_updated_list"
-              - "'pip' not in pip3_outdated_list"
-              - "'vault-cli' not in pip3_updated_list"
-              - "'vault-cli' in pip3_outdated_list"
-              - "'yamllint' not in pip3_updated_list"
-              - "'yamllint' in pip3_outdated_list"
-              - "'docker' in pip3_updated_list"
-              - "'docker' not in pip3_outdated_list"
+              - "item in pip3_updated_list"
+              - "item not in pip3_outdated_list"
+          loop: "{{ wanted_up_to_date_list }}"
+
+        - name: "Verify out-of-date packages"
+          ansible.builtin.assert:
+            that:
+              - "item in pip3_outdated_list"
+              - "item not in pip3_updated_list"
+          loop: "{{ wanted_out_of_date_list }}"
 
         - name: "Print up-to-date packages"
           ansible.builtin.debug:

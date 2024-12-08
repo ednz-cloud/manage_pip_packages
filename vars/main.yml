@@ -7,3 +7,11 @@ manage_pip_packages_required_packages:
   - name: python3-pip
     version: latest
     state: present
+
+manage_pip_packages_venv_required_packages:
+  - name: python3-venv
+    version: latest
+    state: present
+
+manage_pip_packages_venv_python_path: "{{ manage_pip_packages_venv_path }}/bin/python3"
+manage_pip_packages_venv_command: "{{ ansible_python_interpreter | default('/usr/bin/python3') }} -m venv"
