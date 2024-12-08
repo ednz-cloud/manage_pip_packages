@@ -1,8 +1,15 @@
 ---
 # defaults file for manage_pip_packages
 manage_pip_packages_install_prereqs: true
+
 manage_pip_packages_list:
-  - name: pip
-    version_constraint: latest
-    state: present
-manage_pip_packages_allow_break_system_packages: false
+  []
+  # - name: pip
+  #   version_constraint: latest
+  #   state: present
+
+manage_pip_packages_break_system_packages: false
+
+manage_pip_packages_create_venv: false
+manage_pip_packages_venv_path: /tmp/venv
+manage_pip_packages_venv_inherit_global: false

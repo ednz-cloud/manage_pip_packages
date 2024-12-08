@@ -1,8 +1,0 @@
----
-# manage_pip_packages_install_python: true
-# manage_pip_packages_install_pip: true
-# manage_pip_packages_list:
-#   - name: pip
-#     version_constraint: latest
-#     state: present
-# manage_pip_packages_allow_break_system_packages: false

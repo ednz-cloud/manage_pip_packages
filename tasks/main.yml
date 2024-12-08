@@ -8,7 +8,9 @@
   ansible.builtin.pip:
     name: "{{ item.name }}{% if item.version_constraint not in [None, '', 'latest'] %}{{ item.version_constraint }}{% endif %}"
     state: "{{ item.state }}"
-    extra_args: "{% if manage_pip_packages_allow_break_system_packages %}--break-system-packages{% endif %}"
+    virtualenv: "{{ manage_pip_packages_venv_path if manage_pip_packages_create_venv else omit }}"
+    virtualenv_command: "{{ manage_pip_packages_venv_command if manage_pip_packages_create_venv else omit }}"
+    break_system_packages: "{{ manage_pip_packages_break_system_packages }}"
   loop: "{{ manage_pip_packages_list }}"
   when: manage_pip_packages_list is defined
     and manage_pip_packages_list not in [None, '']
